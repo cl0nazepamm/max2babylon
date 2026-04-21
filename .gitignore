@@ -9,3 +9,6 @@ obj/
 
 Max2Babylon/**/bin/
 Max2Babylon/**/obj/
+dev.bat
+deploy.bat
+Max2Babylon/2027/Deploy-2027.ps1
