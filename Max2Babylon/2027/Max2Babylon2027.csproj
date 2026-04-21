@@ -1,0 +1,141 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <UseWPF>true</UseWPF>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Max2Babylon</RootNamespace>
+    <AssemblyName>Max2Babylon</AssemblyName>
+    <Platforms>AnyCPU;x64</Platforms>
+    <PlatformTarget>x64</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
+    <LangVersion>latest</LangVersion>
+    <NoWarn>$(NoWarn);WFO1000</NoWarn>
+    <Configurations>Debug;Release</Configurations>
+    <MaxSdkDir Condition="'$(MaxSdkDir)' == '' and '$(ADSK_3DSMAX_x64_2027)' != ''">$(ADSK_3DSMAX_x64_2027)</MaxSdkDir>
+    <MaxSdkDir Condition="'$(MaxSdkDir)' == ''">C:\Program Files\Autodesk\3ds Max 2027</MaxSdkDir>
+    <ThirdPartyDir>..\..\Refs</ThirdPartyDir>
+    <Company></Company>
+    <Product>Max2Babylon</Product>
+    <Description>Max2Babylon exporter for 3ds Max 2027</Description>
+    <Copyright>Copyright © 2024</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Version>1.0.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DefineConstants>$(DefineConstants);DEBUG;TRACE;MAX2027</DefineConstants>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DefineConstants>$(DefineConstants);TRACE;MAX2027</DefineConstants>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+  </PropertyGroup>
+
+  <Target Name="ValidateMaxSdkDir" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(MaxSdkDir)\Autodesk.Max.dll')" Text="3ds Max 2027 SDK was not found. Set ADSK_3DSMAX_x64_2027 or MaxSdkDir to your local install path." />
+  </Target>
+
+  <Target Name="ValidateThirdPartyRefs" BeforeTargets="ResolveReferences">
+    <Error Condition="!Exists('$(ThirdPartyDir)\GDImageLibrary.dll')" Text="Missing third-party dependency: $(ThirdPartyDir)\GDImageLibrary.dll" />
+    <Error Condition="!Exists('$(ThirdPartyDir)\Newtonsoft.Json.dll')" Text="Missing third-party dependency: $(ThirdPartyDir)\Newtonsoft.Json.dll" />
+    <Error Condition="!Exists('$(ThirdPartyDir)\TargaImage.dll')" Text="Missing third-party dependency: $(ThirdPartyDir)\TargaImage.dll" />
+    <Error Condition="!Exists('$(ThirdPartyDir)\TQ.Texture.dll')" Text="Missing third-party dependency: $(ThirdPartyDir)\TQ.Texture.dll" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="Autodesk.Max">
+      <HintPath>$(MaxSdkDir)\Autodesk.Max.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="CSharpUtilities">
+      <HintPath>$(MaxSdkDir)\CSharpUtilities.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="ExplorerFramework">
+      <HintPath>$(MaxSdkDir)\ExplorerFramework.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GDImageLibrary">
+      <HintPath>$(ThirdPartyDir)\GDImageLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="ManagedServices">
+      <HintPath>$(MaxSdkDir)\ManagedServices.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MaxCustomControls">
+      <HintPath>$(MaxSdkDir)\MaxCustomControls.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(ThirdPartyDir)\Newtonsoft.Json.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="SceneExplorer">
+      <HintPath>$(MaxSdkDir)\SceneExplorer.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="TargaImage">
+      <HintPath>$(ThirdPartyDir)\TargaImage.dll</HintPath>
+    </Reference>
+    <Reference Include="TQ.Texture">
+      <HintPath>$(ThirdPartyDir)\TQ.Texture.dll</HintPath>
+    </Reference>
+    <Reference Include="UiViewModels">
+      <HintPath>$(MaxSdkDir)\UiViewModels.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\*.cs">
+      <Link>%(Filename)%(Extension)</Link>
+    </Compile>
+    <Compile Include="..\Exporter\*.cs">
+      <Link>Exporter\%(Filename)%(Extension)</Link>
+    </Compile>
+    <Compile Include="..\Extensions\*.cs">
+      <Link>Extensions\%(Filename)%(Extension)</Link>
+    </Compile>
+    <Compile Include="..\Forms\*.cs">
+      <Link>Forms\%(Filename)%(Extension)</Link>
+    </Compile>
+    <Compile Include="..\Tools\*.cs">
+      <Link>Tools\%(Filename)%(Extension)</Link>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\Forms\*.resx">
+      <Link>Forms\%(Filename)%(Extension)</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Scripts\*.ms">
+      <Link>Scripts\%(Filename)%(Extension)</Link>
+    </None>
+    <None Include="Scripts\*.ms" />
+    <None Include="Resources\MaxExporter.png" />
+  </ItemGroup>
+
+  <Import Project="..\..\SharedProjects\BabylonExport.Entities\BabylonExport.Entities.projitems" Label="Shared" />
+  <Import Project="..\..\SharedProjects\BabylonFileConverter\BabylonFileConverter.projitems" Label="Shared" />
+  <Import Project="..\..\SharedProjects\GltfExport.Entities\GltfExport.Entities.projitems" Label="Shared" />
+  <Import Project="..\..\SharedProjects\Babylon2GLTF\Babylon2GLTF.projitems" Label="Shared" />
+  <Import Project="..\..\SharedProjects\Utilities\Extensions.projitems" Label="Shared" />
+</Project>

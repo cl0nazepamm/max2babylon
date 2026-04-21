@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.dotnet_cli/
+*.user
+*.suo
+*.pdb
+*.cache
+
+Max2Babylon/**/bin/
+Max2Babylon/**/obj/

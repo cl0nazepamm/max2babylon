@@ -1,0 +1,22 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Max2Babylon2027", "Max2Babylon\2027\Max2Babylon2027.csproj", "{5B1A6062-8615-48FA-9F27-1D4F6781C7B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B1A6062-8615-48FA-9F27-1D4F6781C7B3}.Debug|x64.ActiveCfg = Debug|x64
+		{5B1A6062-8615-48FA-9F27-1D4F6781C7B3}.Debug|x64.Build.0 = Debug|x64
+		{5B1A6062-8615-48FA-9F27-1D4F6781C7B3}.Release|x64.ActiveCfg = Release|x64
+		{5B1A6062-8615-48FA-9F27-1D4F6781C7B3}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
