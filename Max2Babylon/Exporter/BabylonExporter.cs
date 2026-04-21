@@ -223,6 +223,9 @@ namespace Max2Babylon
 
             this.exportParameters = exportParameters;
             IINode exportNode = null;
+#if DEBUG
+            double flattenTime = 0;
+#endif
             if (exportParameters is MaxExportParameters)
             {
                 MaxExportParameters maxExporterParameters = (exportParameters as MaxExportParameters);
@@ -248,7 +251,7 @@ namespace Max2Babylon
                 {
                     FlattenItem(ref exportNode);
 #if DEBUG
-                    double flattenTime = watch.ElapsedMilliseconds / 1000.0;
+                    flattenTime = watch.ElapsedMilliseconds / 1000.0;
                     RaiseMessage(string.Format("Nodes flattened in {0:0.00}s", flattenTime ), Color.Blue);
 #endif
                 }

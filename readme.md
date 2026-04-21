@@ -1,6 +1,6 @@
-# Max2Babylon 2027
+# Max2Babylon
 
-Small, 3ds Max 2027-only fork of the Babylon.js exporter.
+Small, 3ds Max 2027+ fork of the Babylon.js exporter.
 
 This repo is trimmed for one job:
 
@@ -11,8 +11,7 @@ This repo is trimmed for one job:
 ## Requirements
 
 - .NET SDK 10
-- 3ds Max 2027 installed at `C:\Program Files\Autodesk\3ds Max 2027`
-  or `ADSK_3DSMAX_x64_2027` set to your Max install path
+- 3ds Max 2027 or higher
 
 ## Build
 
@@ -62,4 +61,3 @@ SharedProjects/                local shared exporter code
 - Autodesk assemblies are not vendored here. The project resolves them from your
   local 3ds Max 2027 install.
 - Third-party runtime DLLs that the exporter still needs are kept in `Refs/`.
-- This fork is intentionally private-fork friendly, not upstream-shaped.
